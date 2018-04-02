@@ -511,12 +511,6 @@ func doFanout(b *testing.B, numServers, numConnections, subsPerConnection int, s
 	msgOp := fmt.Sprintf("MSG %s %d %d\r\n%s\r\n", subject, sidFloor, len(payload), payload)
 	expected := len(msgOp) * subsPerConnection * b.N
 
-	// Holds client connection and chan bool
-	type cc struct {
-		ch chan bool
-		nc net.Conn
-	}
-
 	// Client connections and subscriptions.
 	clients := make([]chan bool, 0, numConnections)
 	for i := 0; i < numConnections; i++ {
