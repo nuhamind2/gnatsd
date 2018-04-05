@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/nats-io/gnatsd/server"
+	"github.com/nuhamind2/gnatsd/server"
 )
 
 var usageStr = `
@@ -77,6 +77,7 @@ func usage() {
 
 func main() {
 	// Create a FlagSet and sets the usage
+	fmt.Println("custom nats nuha")
 	fs := flag.NewFlagSet("nats-server", flag.ExitOnError)
 	fs.Usage = usage
 
