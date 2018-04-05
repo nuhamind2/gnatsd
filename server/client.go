@@ -15,6 +15,7 @@ package server
 
 import (
 	"bufio"
+	"bytes"
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
@@ -839,6 +840,9 @@ func (c *client) processSub(argo []byte) (err error) {
 func (c *client) canSubscribe(sub []byte) bool {
 	if c.perms == nil {
 		return true
+	}
+	if bytes.HasPrefix(sub, []byte("_INBOX.>")) || bytes.HasPrefix(sub, []byte("_INBOX.*")) {
+		return false
 	}
 	return len(c.perms.sub.Match(string(sub)).psubs) > 0
 }
